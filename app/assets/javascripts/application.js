@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
-//= require underscore
-// 
-// Your Quizzy code should go here.
+//= require underscore-min
+//= require quizzes
+
