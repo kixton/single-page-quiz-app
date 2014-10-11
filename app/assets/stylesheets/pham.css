@@ -1,0 +1,84 @@
+html,
+body,
+.container {
+  margin: 0 auto;
+  font-size: 16px;
+}
+
+.logo {
+  font-size: 20px;
+}
+
+.navbar {
+  float: left;
+  border: 5px solid #ddd;
+  padding: 15px 0;
+  position:absolute;
+  width: 250px;
+  bottom: 0;
+  top: 0;
+}
+
+.navbar-header {
+  text-align: center;
+}
+
+.create-btn {
+  border: 3px solid #26c6da;
+  color: #00bcd4;
+  padding: 10px 20px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul li a {
+  display: block;
+  background: #80deea;
+  font-size: 16px;
+  padding: 20px;
+  text-decoration: none !important;
+}
+
+ul li a:hover {
+  display: block;
+  background: #4dd0e1;
+}
+
+.main-body {
+  border: 5px solid #ddd;
+  margin-left : 255px;
+  padding: 15px;
+  position:absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.submit {
+  background: #fff;
+  color: #00bcd4;
+  border: 3px solid #26c6da;
+  border-radius: 30px;
+  font-size: 16px;
+  padding: 10px 20px;
+  margin: 10px 0;
+}
+
+.submit:hover {
+  background: #26c6da;
+  color: #fff;
+}
+
+input, 
+textarea, 
+select, 
+a { 
+  outline: none; 
+}
