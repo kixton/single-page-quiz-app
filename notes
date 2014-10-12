@@ -1,0 +1,45 @@
+settimeout
+
+3 types of questions
+  create templates for each type
+
+2 types of answers
+  on button click
+  on submit
+
+show question
+  depending on type of question
+
+increment question_num
+increment score (if correct)
+call singleQuestion var again....
+set 
+
+if question_num < # of questions... continue loop
+else return the final score
+
+increment then call function again 
+
+set timeout BEFORE calling next...
+
+q_count = 0
+a_count = 0
+
+on click of navlink
+send ajax request
+  get data on quiz (question & answer choices)
+
+for (var q_count = 0; q_count < data.length; i++)
+
+  1) .empty
+      display Q&A (based on data from [i])
+
+  2) user submits answer
+
+  3) grade: (in)correct
+    i++
+    timeout 1 sec
+    1) display next Q&A
+
+
+var displayQuestion

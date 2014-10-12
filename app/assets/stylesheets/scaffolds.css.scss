@@ -1,37 +1,38 @@
 body {
-  background-color: #fff;
-  color: #333;
-  font-family: helvetica, verdana, arial, sans-serif;
-  font-size: 13px;
-  line-height: 18px;
+  /*background-color: #fff;*/
+  /*color: #333;*/
+  /*font-family: helvetica, verdana, arial, sans-serif;*/
+  /*font-size: 13px;*/
+  /*line-height: 18px;*/
 }
 
 p, ol, ul, td {
-  font-family: helvetica, verdana, arial, sans-serif;
-  font-size: 13px;
-  line-height: 18px;
+  /*font-family: helvetica, verdana, arial, sans-serif;*/
+  /*font-size: 13px;*/
+  /*line-height: 18px;*/
 }
 
 pre {
-  background-color: #eee;
-  padding: 10px;
-  font-size: 11px;
+  /*background-color: #eee;*/
+  /*padding: 10px;*/
+  /*font-size: 11px;*/
 }
 
 a {
   color: #000;
   &:visited {
-    color: #666;
+    color: #000;
   }
   &:hover {
-    color: #fff;
-    background-color: #000;
+    font-weight: bold;
+    /*color: #fff;*/
+    /*background-color: #000;*/
   }
 }
 
 div {
   &.field, &.actions {
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
   }
 }
 

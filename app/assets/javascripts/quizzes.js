@@ -22,7 +22,9 @@ $(document).ready(function() {
 
     // clear the div then create a form
     $(".main-body").empty();
-    $(".main-body").html(data[i].question).append();
+    var question_span = "<span class='question'></span>";
+    $(".main-body").append(question_span);
+    $(".question").html(data[i].question).append();
     $(formBody).appendTo(".main-body");
 
     // sanitize answers into array
@@ -43,7 +45,7 @@ $(document).ready(function() {
     }); // _.each 
 
     // send data along with submitAnswer function
-    submitAnswer(data);
+    submitAnswer(data); 
 
   };
 
@@ -52,7 +54,7 @@ $(document).ready(function() {
     // get selectedAnswer
     $("input:radio[name=answer-choice]").click(function() {
       selectedAnswer = $(this).val();
-      console.log(selectedAnswer);
+      // console.log("selected answer: " + selectedAnswer);
     }); // input.click
 
     // compare to correctAnswer
@@ -66,20 +68,26 @@ $(document).ready(function() {
       // console.log("question ID " + questionId);
 
       $.get("/quizzes/" + quizId + "/questions/" + questionId + "check?answer=" + selectedAnswer, function(data) {
+        console.log("getting answer");
+        console.log(data);
+
+        $.get("/quizzes/" + quizId + "/scores", function(data) {
+          console.log(data);
+        });
 
       }); 
 
-      if ( selectedAnswer === correctAnswer) {
-        $(".main-body").append("<span class='correct'>Correct!</span>");
-        // increment question count
-        i++;
-        // display nextQuestion
-        nextQuestion(data);
-      } else {
-        $(".main-body").append("<span class='incorrect'>Sorry, that is incorrect.</span>");
-        i++;
-        nextQuestion(data);
-      }
+      // if ( selectedAnswer === correctAnswer) {
+      //   $(".main-body").append("<span class='correct'>Correct!</span>");
+      //   // increment question count
+      //   i++;
+      //   // display nextQuestion
+      //   nextQuestion(data);
+      // } else {
+      //   $(".main-body").append("<span class='incorrect'>Sorry, that is incorrect.</span>");
+      //   i++;
+      //   nextQuestion(data);
+      // }
     }); // form.submit
   };
 
@@ -90,7 +98,7 @@ $(document).ready(function() {
         displayQuestion(data);
         console.log("next question displayed");
       }, 1000);
-    // if this is the last question in the quiz...
+    // if last question in the quiz, quiz complete
     } else if (i === data.length) {
       setTimeout(function() {
         $(".main-body").empty();
@@ -103,6 +111,8 @@ $(document).ready(function() {
 
   $(".all-quizzes").on("click", "a", function() {
 
+    $("a").removeClass("active");
+    $(this).addClass("active");
     quizId = $(this).attr("quiz-id");
     console.log("quiz ID " + quizId);
 
