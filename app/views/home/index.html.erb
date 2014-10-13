@@ -1,26 +1,130 @@
 
 <div class="navbar">
 
-  <div class="navbar-header">
-    <a href="#"><span class="nav-main-btn">TAKE QUIZ</span></a>
-  </div>
-  <ul class="all-quizzes">
+  <a href="#" class="take-quiz"><span class="nav-main-btn">TAKE A QUIZ</span></a>
+  <ul class="all-quizzes" display="none">
     <!-- links to quizzes go here -->
   </ul>
+
+  <a href="#" class="create-quiz"><span class="nav-main-btn">CREATE QUIZ</span></a>
 
 </div> <!-- navbar -->
 
 
 <div class="main-body">
-  <strong>ABOUT THIS PROJECT</strong><br>
-  Week 7 project at <a href="https://makersquare.com">MakerSquare</a> (coding bootcamp)<br>
-  Created with: Ruby on Rails, JavaScript, jQuery, HTML, CSS<br><br>
 
-  <!-- <strong>KEY CONCEPT IN PRACTICE</strong><br> -->
-  OVERVIEW:<br>
-  <strong>Single-Page Application</strong> to provide fluid user experience<br>
-  <em>Note that the browser does not reload as user navigates the application</em>
-  <br><br><br>
-  Created by: <a href="https://github.com/kixton">Kim Pham</a><br>
+  <div class="about-project" style="display:none">
+    <strong>ABOUT</strong><br>
+    Week 7 project at <a href='https://makersquare.com'>MakerSquare</a> (coding bootcamp)<br>
+    Concept in practice: Single-Page Application to provide fluid user experience<br>
+    <em>(Note that the browser does not reload as user navigates the application)</em><br><br>
+    Created with: Ruby on Rails, JavaScript, jQuery, Underscore.js, HTML, CSS<br>
+    Created by: <a href='https://github.com/kixton'>Kim Pham</a><br>
+    </script>
+  </div> <!-- about-project -->
+  
+  <div class="quiz-info">
+  </div>
 
+  <div class="create-quiz-div" style="display:none">
+    
+    <form class="new-quiz">
+      <label for="quiz-name">Quiz Title</label>
+      <input type="text" name="quiz-name" class="textbox quiz-name" maxlength="50">
+
+      <hr>
+        
+      <!-- <div class="q1"> -->
+        Question #<span class="question-num">1</span>
+        <input type="text" name="quiz" class="textbox quiz-question"><br><br>
+
+        Type of Question:
+        <input type="radio" name="question-type" value="multiple" class="answer-choice"> Multiple Choice 
+        <input type='radio' name='question-type' value='boolean' class='answer-choice'> True/False 
+        <input type='radio' name='question-type' value='fill' class='answer-choice'> Fill in the Blank<br><br>
+        
+        <!-- answer choices here -->
+
+        
+      <!-- </div> q1 -->
+
+      <hr>
+
+      <div class="q2">
+        Question #<span class="question-num">2</span>
+        <input type="text" name="quiz" class="textbox quiz-question"><br><br>
+
+        Type of Question:
+        <input type="radio" name="question-type" value="multiple" class="answer-choice"> Multiple Choice 
+        <input type='radio' name='question-type' value='boolean' class='answer-choice'> True/False 
+        <input type='radio' name='question-type' value='fill' class='answer-choice'> Fill in the Blank<br><br>
+      </div>
+        
+      <br><i class="fa fa-plus"></i> Add another question<br><br>
+
+      <input type="submit" value="CREATE QUIZ" class="submit">
+    </form>
+
+  </div> <!-- create-quiz -->
+
+</div> <!-- main-body -->
+
+<div class="mc-answer-choices" style="display:none">
+  Answer Choice:
+    <input type="text" name="answer" class="textbox multi-box"> 
+    <input type="radio" name="correct-answer"> 
+    <span class="correct-label">This is the correct answer</span><br>
+
+  Answer Choice:
+    <input type="text" name="answer" class="textbox multi-box"> 
+    <input type="radio" name="correct-answer"> 
+    <span class="correct-label">This is the correct answer</span><br>
+
+  Answer Choice:
+    <input type="text" name="answer" class="textbox multi-box"> 
+    <input type="radio" name="correct-answer"> 
+    <span class="correct-label">This is the correct answer</span><br>
+
+  Answer Choice:
+    <input type="text" name="answer" class="textbox multi-box"> 
+    <input type="radio" name="correct-answer"> 
+    <span class="correct-label">This is the correct answer</span><br><br>
+
+  <i class="fa fa-remove"></i> Remove question<br><br>
 </div>
+
+<div class="tf-answer-choices" style="display:none">
+  True 
+    <input type="radio" name="correct-answer"> 
+    <span class="correct-label">This is the correct answer</span><br>
+
+  False
+    <input type="radio" name="correct-answer"> 
+    <span class="correct-label">This is the correct answer</span><br><br>
+
+  <i class="fa fa-remove"></i> Remove question<br><br>
+</div>
+
+<div class="fill-answer-choice" style="display:none">
+  Correct Answer:
+  <input type="text" name="fill-answer" class="textbox fill-box"><br><br>
+  <i class="fa fa-remove"></i> Remove question<br><br>
+</div>
+
+
+
+<script type="text/template" class="new-quiz">
+  <form class="new-quiz">
+    <label for="quiz-name">Quiz Title</label>
+    <input type="text" id="quiz-name" name="quiz-name" class="textbox"><br>
+
+    // first question
+
+    <input type='submit' value='SUBMIT' class='submit'>
+  </form>
+</script>
+
+
+
+
+

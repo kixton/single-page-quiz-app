@@ -1,17 +1,15 @@
+* {
+  font-family: Quicksand;
+}
+
 html,
 body,
-.container {
-  font-family: Quicksand;
+.container,
+.main-body,
+.mc-answer-choices {
   margin: 0 auto;
   font-size: 20px;
-}
-
-a {
-  font-family: Quicksand;
-}
-
-.logo {
-  font-size: 20px;
+  height: 100%;
 }
 
 .navbar {
@@ -19,7 +17,6 @@ a {
   border: 5px solid #000;
   position:absolute;
   width: 250px;
-  bottom: 0;
   top: 0;
 }
 
@@ -53,6 +50,7 @@ ul li a {
   text-decoration: none !important;
   padding: 20px 0 10px 0;
   margin-left: 20px;
+  margin-bottom: 10px;
   border-bottom: 4px solid transparent;
 }
 
@@ -71,22 +69,16 @@ ul li .active {
   border: 5px solid #000;
   margin-left : 255px;
   padding: 15px;
-  position:absolute;
+/*  position:absolute;
   bottom: 0;
   top: 0;
   left: 0;
-  right: 0;
+  right: 0;*/
 }
 
 .question {
   font-size: 22px;
   font-weight: bold;
-}
-
-input[type=radio] {
-  background: transparent;
-  border: 3px solid #000;
-  margin-top: 20px;
 }
 
 .submit {
@@ -107,4 +99,31 @@ textarea,
 select, 
 a { 
   outline: none; 
+}
+
+.textbox {
+  background:;
+  font-size: 22px;
+  border: 3px solid #000;
+  padding: 5px;
+  margin: 10px 0 10px 20px;
+  width: 350px;
+}
+
+.multi-box {
+  margin: 5px 0 5px 25px;
+  /*border-color: #999;*/
+}
+
+.quiz-name {
+  margin-left: 80px;
+}
+
+.quiz-question {
+  margin-left: 60px;  
+}
+
+.correct-label {
+  color: #666;
+  font-style: italic;
 }
