@@ -14,11 +14,11 @@ $(document).ready(function() {
   var i = 0; // question counter
   var j = 0; // answer counter
   var k = 0; // correct answers counter
+  var selectedAnswer;
+  var quizId;
   var answersMCTemplate = "<input type='radio' name='answer-choice' class='answer-choice'>";
   var answersTFTemplate;
   var formBody = "<form class='quiz-answers'></form>";
-  var selectedAnswer;
-  var quizId;
   var submitButton = "<input type='submit' value='SUBMIT' class='submit'>";
 
   var displayQuestion = function(data) {
@@ -123,6 +123,7 @@ $(document).ready(function() {
     }); // .get
   }); // on("click", "a")
 
+
   $(".take-quiz").click(function() {
     $(".all-quizzes").show(1000);
     $("a").removeClass("active");
@@ -131,61 +132,59 @@ $(document).ready(function() {
     $(".create-quiz-div").hide();
   });
 
-
+  // onClick of "CreateQuiz" show form
   $(".create-quiz").click(function() {
     $(".all-quizzes").hide(1000);
     $(".about-project").hide();
     $(".quiz-info").empty();
-    $(".create-quiz-div").show();
-
+    $(".create-quiz-div").attr("style", "display:block");
     var quizCounter = 0;
 
     $(".add-question").click(function() {
       quizCounter ++;
 
       var newQ = $(".new-question:last").clone().show();
+      // this refers to "Add question" button
       $(this).before(newQ);
-      console.log(this);
-      console.log(this.closest(".question-num"));
-
-      $(this).find(".question-num:last").html(quizCounter);
-
+      $(".answer-choice").slice(-3).attr("name", "question-type q" + quizCounter);
+      // $(".question-num").slice(-1).html(quizCounter);
 
       $(".answer-choice").change(function(){
-        var z = $( "input:radio[name='question-type']:checked" ).val();
-        // console.log(this.val());
+        // this is the radio button selected
+        var z = $(this).val();
+        console.log(this);
+        var thisItem = this;
 
-        if ($(this).val() === 'multiple') {
-
-          console.log("clicked");
-
-          $("input:radio[name='question-type']:checked").nextAll(".create-answers").empty();
-
+        // if you selected Multiple Choice
+        if (z === 'multiple') {
+          console.log(this);
+          // $(this > ".create-answer").empty();
+          // $(this).children(".create-answers").empty();
           var q = $(this).nextAll(".create-answers");
           $(".mc-answer-choices:last").clone().show().appendTo(q[0]);
+        } else if (z === 'boolean') {
+          $(this).find("> .create-answer").empty();
 
-        } else if ($(this).val() === 'boolean') {
-
-          $("input:radio[name='question-type']:checked").nextAll(".create-answers").empty();
+          // $("input:radio[name='question-type']:checked").children(".create-answers").empty();
           var r = $(this).nextAll(".create-answers");
           $(".tf-answer-choices:last").clone().show().appendTo(r[0]);
-          
-        } else if ($(this).val() === 'fill') {
-          $("input:radio[name='question-type']:checked").nextAll(".create-answers").empty();
+        } else if (z === 'fill') {
+          $("input:radio[name='question-type']:checked").children(".create-answers").empty();
           var x = $(this).nextAll(".create-answers");
           $(".fill-answer-choice:last").clone().show().appendTo(x[0]);
-
         } // if, else if...
       }); // on change of question-type
 
+      $(".remove-question").click(function() {
+        console.log("clicked");
+        $(this).parent(".new-question").empty();
+      });
+
     }); // add-question
-
-    
-
 
   }); // .create-quiz
 
-  
+
 
 
 });
