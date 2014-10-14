@@ -120,12 +120,24 @@ a {
 }
 
 .quiz-question {
-  margin-left: 75px;  
+  margin-left: 88px;  
+}
+
+.answer-choice {
+  margin-left: 15px;
 }
 
 .correct-label {
   color: #666;
   font-style: italic;
+}
+
+.true-choice {
+  margin-right: 15px;
+}
+
+.false-choice {
+  margin-right: 10px;
 }
 
 .add-question,
