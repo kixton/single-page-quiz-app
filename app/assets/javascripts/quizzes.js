@@ -87,7 +87,6 @@ $(document).ready(function() {
   };
 
   var nextQuestion = function(data) {
-
     if (i < data.length) {
       setTimeout(function() {
         displayQuestion(data);
@@ -109,8 +108,8 @@ $(document).ready(function() {
         k = 0; 
       }, 1000);
     }
-
   };
+
 
   $(".all-quizzes").on("click", "a", function() {
 
@@ -139,29 +138,54 @@ $(document).ready(function() {
     $(".quiz-info").empty();
     $(".create-quiz-div").show();
 
-    $("input[name='question-type']").change(function(){
-      if ($(this).val() === 'multiple') {
-        $(".tf-answer-choices").hide();
-        $(".fill-answer-choice").hide();
-        var mc = $(".mc-answer-choices").show();
-        // .append(mc);
+    var quizCounter = 0;
 
-        // $(".q1").append(mc);
-      } else if ($(this).val() === 'boolean') {
-        $(".mc-answer-choices").hide();
-        $(".fill-answer-choice").hide();
-        var tf = $(".tf-answer-choices").show();
-        // $(".q1").append(tf);
-      } else if ($(this).val() === 'fill') {
-        $(".tf-answer-choices").hide();
-        $(".mc-answer-choices").hide();
-        var fill = $(".fill-answer-choice").show();
-        // $(".q1").append(fill);
-      }
+    $(".add-question").click(function() {
+      quizCounter ++;
 
-    });
+      var newQ = $(".new-question:last").clone().show();
+      $(this).before(newQ);
+      console.log(this);
+      console.log(this.closest(".question-num"));
 
-  });
+      $(this).find(".question-num:last").html(quizCounter);
+
+
+      $(".answer-choice").change(function(){
+        var z = $( "input:radio[name='question-type']:checked" ).val();
+        // console.log(this.val());
+
+        if ($(this).val() === 'multiple') {
+
+          console.log("clicked");
+
+          $("input:radio[name='question-type']:checked").nextAll(".create-answers").empty();
+
+          var q = $(this).nextAll(".create-answers");
+          $(".mc-answer-choices:last").clone().show().appendTo(q[0]);
+
+        } else if ($(this).val() === 'boolean') {
+
+          $("input:radio[name='question-type']:checked").nextAll(".create-answers").empty();
+          var r = $(this).nextAll(".create-answers");
+          $(".tf-answer-choices:last").clone().show().appendTo(r[0]);
+          
+        } else if ($(this).val() === 'fill') {
+          $("input:radio[name='question-type']:checked").nextAll(".create-answers").empty();
+          var x = $(this).nextAll(".create-answers");
+          $(".fill-answer-choice:last").clone().show().appendTo(x[0]);
+
+        } // if, else if...
+      }); // on change of question-type
+
+    }); // add-question
+
+    
+
+
+  }); // .create-quiz
+
+  
 
 
 });

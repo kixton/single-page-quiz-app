@@ -31,36 +31,8 @@
     <form class="new-quiz">
       <label for="quiz-name">Quiz Title</label>
       <input type="text" name="quiz-name" class="textbox quiz-name" maxlength="50">
-
-      <hr>
-        
-      <!-- <div class="q1"> -->
-        Question #<span class="question-num">1</span>
-        <input type="text" name="quiz" class="textbox quiz-question"><br><br>
-
-        Type of Question:
-        <input type="radio" name="question-type" value="multiple" class="answer-choice"> Multiple Choice 
-        <input type='radio' name='question-type' value='boolean' class='answer-choice'> True/False 
-        <input type='radio' name='question-type' value='fill' class='answer-choice'> Fill in the Blank<br><br>
-        
-        <!-- answer choices here -->
-
-        
-      <!-- </div> q1 -->
-
-      <hr>
-
-      <div class="q2">
-        Question #<span class="question-num">2</span>
-        <input type="text" name="quiz" class="textbox quiz-question"><br><br>
-
-        Type of Question:
-        <input type="radio" name="question-type" value="multiple" class="answer-choice"> Multiple Choice 
-        <input type='radio' name='question-type' value='boolean' class='answer-choice'> True/False 
-        <input type='radio' name='question-type' value='fill' class='answer-choice'> Fill in the Blank<br><br>
-      </div>
-        
-      <br><i class="fa fa-plus"></i> Add another question<br><br>
+      <hr><br>
+      <a href="#" class="add-question"><i class="fa fa-plus"></i> Add question</a><br><br>
 
       <input type="submit" value="CREATE QUIZ" class="submit">
     </form>
@@ -68,6 +40,23 @@
   </div> <!-- create-quiz -->
 
 </div> <!-- main-body -->
+
+<div class="new-question" question-id="" style="display:none">
+  Question #<span class="question-num"></span>
+  <input type="text" name="quiz" class="textbox quiz-question"><br><br>
+
+  Type of Question:
+  <input type="radio" name="question-type" value="multiple" class="answer-choice"> Multiple Choice 
+  <input type="radio" name="question-type" value="boolean" class="answer-choice"> True/False 
+  <input type="radio" name="question-type" value="fill" class="answer-choice"> Fill in the Blank<br><br>
+  
+  <div class="create-answers">
+  </div>
+  
+<hr>
+
+</div>
+
 
 <div class="mc-answer-choices" style="display:none">
   Answer Choice:
