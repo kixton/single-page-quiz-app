@@ -2,6 +2,10 @@
   font-family: Quicksand;
 }
 
+h1 {
+  font-size: 100px;
+}
+
 html,
 body,
 .container,
@@ -81,7 +85,8 @@ ul li .active {
   font-weight: bold;
 }
 
-.submit {
+.submit,
+.submit-quiz-btn {
   background: transparent;
   border: 3px solid #000;
   font-size: 16px;

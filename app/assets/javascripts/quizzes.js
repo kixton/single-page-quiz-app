@@ -18,7 +18,7 @@ $(document).ready(function() {
   var selectedAnswer;
   var quizId;
 
-  // to update into underscore template
+  // to update with underscore template
   var answersMCTemplate = "<input type='radio' name='answer-choice' class='answer-choice'>";
   var answersTFTemplate;
   var formBody = "<form class='quiz-answers'></form>";
@@ -79,10 +79,8 @@ $(document).ready(function() {
           $(".quiz-info").append("<span class='incorrect'>Sorry, that is incorrect.</span>");
         }
       }); // get questionScore 
-
         i++; // increment question count
-        nextQuestion(data);
-
+        nextQuestion(data); 
     }); // form.submit
   };
 
@@ -97,22 +95,19 @@ $(document).ready(function() {
       setTimeout(function() {
         var score = Math.floor((k / data.length) * 100);
         console.log(score + "%");
-
-        // $.post("link/to/post", function(datatopost) {
-
-        // });
-
         $(".quiz-info").empty();
         $(".quiz-info").html("You completed the quiz!<br><br> Score: " + score + "%");
-        i = 0; // reset counters
-        j = 0;
-        k = 0; 
+        i = 0; j = 0; k = 0; // reset counters
       }, 1000);
     }
   };
 
+  var submitNewQuiz = function(data) {
+    $.post("/quizzes", data);
+  };
 
-  // onClick of quiz name, show first quiz question
+
+  // show first question of selected quiz
   $(".all-quizzes").on("click", "a", function() {
 
     $(".all-quizzes").show(1000);
@@ -127,7 +122,7 @@ $(document).ready(function() {
     }); // .get
   }); // on("click", "a")
 
-
+  // 
   $(".take-quiz").click(function() {
     $(".all-quizzes").show(1000);
     $("a").removeClass("active");
@@ -144,6 +139,7 @@ $(document).ready(function() {
     $(".create-quiz-div").attr("style", "display:block");
     var quizCounter = 0;
 
+    // add another question to "Create Quiz" form
     $(".add-question").click(function() {
       quizCounter ++;
 
@@ -151,8 +147,8 @@ $(document).ready(function() {
       // this refers to "Add question" button
       $(this).before(newQ);
       $(".answer-choice").slice(-3).attr("name", "question-type q" + quizCounter);
-      // $(".question-num").slice(-1).html(quizCounter);
 
+      // select the type of question (Multiple Choice, True/False, Fill In Blank)
       $(".answer-choice").change(function(){
         // this is the radio button selected
         var z = $(this).val();
@@ -173,6 +169,7 @@ $(document).ready(function() {
         } // if, else if...
       }); // on change of question-type
 
+      // remove question from "Create Quiz" form
       $(".remove-question").click(function() {
         console.log("clicked");
         $(this).parent(".new-question").empty();
@@ -180,9 +177,30 @@ $(document).ready(function() {
 
     }); // add-question
 
+    // $(".submit-quiz-btn").click(function() {
+    //   var quizName = $("#quiz-name").val();
+    //   console.log(quizName);
+
+    //   var quizData = {
+    //     "quiz[title]": quizName
+    //   };
+
+    //   $.post("/quizzes", quizData);
+    // });
+
   }); // .create-quiz
 
+    $(".create-quiz-btn").click(function() {
+      var quizName = $(".quiz-name").val();
+      console.log(quizName);
 
+      var quizData = {
+        title: quizName
+      };
+      
+      $.post("/quizzes", quizData);
+      
+    });
 
 
 });
