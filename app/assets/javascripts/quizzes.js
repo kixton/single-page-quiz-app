@@ -1,7 +1,9 @@
 $(document).ready(function() {
 
+  // show div with info about project
   $(".about-project").show();
 
+  // get all quizzes; loop thru quiz append link to quiz in navbar
   $.get( "/quizzes", function(data) {
     var quizzes = data;
     _.each(quizzes, function(quiz) {     
@@ -10,26 +12,26 @@ $(document).ready(function() {
     });
   });
 
-  // variables defined
-  var user_id = 1; // for demo purpose
+  // variables defined 
+  var user_id = 1; // for demo purposes
   var i = 0; // question counter
   var j = 0; // answer counter
   var k = 0; // correct answers counter
   var selectedAnswer;
   var quizId;
 
-  // to update with underscore template
+  // NOTE: to update with underscore template
   var answersMCTemplate = "<input type='radio' name='answer-choice' class='answer-choice'>";
   var answersTFTemplate;
   var formBody = "<form class='quiz-answers'></form>";
   var submitButton = "<input type='submit' value='SUBMIT' class='submit'>";
 
   var displayQuestion = function(data) {
-
-    // clear the div then create a form
+    // clear views
     $(".about-project").hide();
     $(".quiz-info").empty();
 
+    // create form
     var question_span = "<span class='question'></span>";
     $(".quiz-info").append(question_span);
     $(".question").html(data[i].question).append();
@@ -38,7 +40,7 @@ $(document).ready(function() {
     // sanitize answers into array
     var answerChoices = data[i].choices.split(";");
 
-    // loop through answers and display as radio buttons
+    // loop through MC answers and display as radio buttons
     _.each(answerChoices, function(answer) {
       var x = $(".quiz-info").find(".quiz-answers");
       x.append(answersMCTemplate);
@@ -51,18 +53,14 @@ $(document).ready(function() {
         j = 0; // reset answer counter
       }
     }); // _.each 
-
-    // send data along with submitAnswer function
     submitAnswer(data); 
+  }; // end displayQuestion
 
-  };
-
+  // check if answer is correct, then proceed to nextQuestion
   var submitAnswer = function(data) {
-
-    // get selectedAnswer
     $("input:radio[name=answer-choice]").click(function() {
       selectedAnswer = $(this).val();
-    }); // input.click
+    }); 
 
     $(".main-body").find("form").submit(function(e) {
       e.preventDefault();
@@ -81,10 +79,10 @@ $(document).ready(function() {
       }); // get questionScore 
         i++; // increment question count
         nextQuestion(data); 
-    }); // form.submit
-  };
+    }); // end form.submit
+  }; // end submitAnswer
 
-  // function to display next question or "Quiz Complete" message
+  // display next question *OR* "Quiz Complete" message
   var nextQuestion = function(data) {
     if (i < data.length) {
       setTimeout(function() {
@@ -94,22 +92,24 @@ $(document).ready(function() {
     } else if (i === data.length) {
       setTimeout(function() {
         var score = Math.floor((k / data.length) * 100);
-        console.log(score + "%");
         $(".quiz-info").empty();
         $(".quiz-info").html("You completed the quiz!<br><br> Score: " + score + "%");
         i = 0; j = 0; k = 0; // reset counters
-      }, 1000);
-    }
-  };
+      }, 1000); // end setTimeout
+    } // end if, else 
+  }; // end nextQuestion
 
-  var submitNewQuiz = function(data) {
-    $.post("/quizzes", data);
-  };
+  // even handler when user clicks "Take Quiz" in navbar
+  $(".take-quiz").click(function() {
+    $(".all-quizzes").show(1000);
+    $("a").removeClass("active");
+    $(".about-project").show();
+    $(".quiz-info").empty();
+    $(".create-quiz-div").hide();
+  }); // end ".take-quiz" event handler
 
-
-  // show first question of selected quiz
+  // on click of quiz link in navbar, show first quiz question
   $(".all-quizzes").on("click", "a", function() {
-
     $(".all-quizzes").show(1000);
     $("a").removeClass("active");
     $(this).addClass("active");
@@ -119,17 +119,9 @@ $(document).ready(function() {
     $.get("/quizzes/" + quizId + "/questions", function(data) {
       // display first question
       displayQuestion(data);
-    }); // .get
-  }); // on("click", "a")
+    }); // end $.get
+  }); // end ".all-quizzes" event handler
 
-  // 
-  $(".take-quiz").click(function() {
-    $(".all-quizzes").show(1000);
-    $("a").removeClass("active");
-    $(".about-project").show();
-    $(".quiz-info").empty();
-    $(".create-quiz-div").hide();
-  });
 
   // onClick of "Create Quiz" navlink, show new quiz form
   $(".create-quiz").click(function() {
@@ -141,10 +133,11 @@ $(document).ready(function() {
 
     // add another question to "Create Quiz" form
     $(".add-question").click(function() {
-      quizCounter ++;
+      quizCounter ++; 
 
       var newQ = $(".new-question:last").clone().show();
-      // this refers to "Add question" button
+
+      // 'this' refers to "Add question" button
       $(this).before(newQ);
       $(".answer-choice").slice(-3).attr("name", "question-type q" + quizCounter);
 
@@ -166,8 +159,8 @@ $(document).ready(function() {
         } else if (z === 'fill') {
           createAnswersDiv.empty();
           $(".fill-answer-choice:last").clone().show().appendTo(createAnswersDiv[0]);
-        } // if, else if...
-      }); // on change of question-type
+        } // end if/else if
+      }); // end ".answer-choice" change
 
       // remove question from "Create Quiz" form
       $(".remove-question").click(function() {
@@ -175,31 +168,46 @@ $(document).ready(function() {
         $(this).parent(".new-question").empty();
       });
 
-    }); // add-question
+    }); // add-question click handler
+  }); // end create-quiz click handler
 
-    // $(".submit-quiz-btn").click(function() {
-    //   var quizName = $("#quiz-name").val();
-    //   console.log(quizName);
+  // function variable to define what happens when user creates new quiz
+  var submitNewQuiz = function(data) {
+    // select quiz name from input box and create quiz object
+    var quizObject = {
+      quiz: { title: $(".quiz-name").val()} 
+    };
+    
+    $.post("/quizzes", quizObject, function(callback) {
+      var newQuizId = data.entity.title;
+    });
 
-    //   var quizData = {
-    //     "quiz[title]": quizName
-    //   };
+    var questionsObject = {
+      question: {
+        question: "",
+        answer: "",
+        choices: "",
+        type: ""
+      }
+    };
 
-    //   $.post("/quizzes", quizData);
-    // });
-
-  }); // .create-quiz
+    $.post("/quizzes/" + newQuizID)
+  };
 
     $(".create-quiz-btn").click(function() {
       var quizName = $(".quiz-name").val();
       console.log(quizName);
 
       var quizData = {
-        title: quizName
+        quiz: { title: quizName }
       };
       
-      $.post("/quizzes", quizData);
-      
+      $.post("/quizzes", quizData, function(data) {
+        var quizId = data.entity.title;
+        console.log("posted quiz");
+        console.log(data);
+      });
+
     });
 
 
